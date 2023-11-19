@@ -1,7 +1,7 @@
 - name: copy rsyslog to backend
   ansible.builtin.template:
     src: rsyslog.conf
-    dest: /etc/rsyslog.d/{{component}}.conf
+    dest: /etc/rsyslog.d/{{ component }}.conf
   when: is_rsys_required
 
 - name: restart rsyslog
