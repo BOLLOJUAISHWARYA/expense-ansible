@@ -8,7 +8,7 @@
   ansible.builtin.systemd:
     name: rsyslog
     state: restarted
-  when: rsys_iis_required
+  when: is_rsys_required
 
 - name: copy elastic search repo
   ansible.builtin.template:
