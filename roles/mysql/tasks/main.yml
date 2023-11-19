@@ -1,7 +1,7 @@
 - name: disable mysql
   ansible.builtin.shell: dnf module disable mysql -y
 
-- name: Copy expense file
+- name: Copy MySQL Repo file
   ansible.builtin.copy:
     src: mysql.repo
     dest: /etc/yum.repos.d/mysql.repo
@@ -10,12 +10,6 @@
   ansible.builtin.dnf:
     name: mysql-community-server
     state: present
-
-- name: Restart Nginx
-  ansible.builtin.systemd:
-    name: nginx
-    state: restarted
-    enabled: yes
 
 - name: Start MySQL Service
   ansible.builtin.systemd:
