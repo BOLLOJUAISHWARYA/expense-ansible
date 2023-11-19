@@ -1,0 +1,23 @@
+- name: Nginx installation
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+
+- name: Copy expense file
+  ansible.builtin.template:
+    src: expense.conf
+    dest: /etc/nginx/default.d/expense.conf
+
+- name: Extracting frontend zip
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-prereq
+  vars:
+    app_dir: /usr/share/nginx/html
+    component: frontend
+
+- name: Restart Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
